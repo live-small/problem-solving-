@@ -1,4 +1,7 @@
 /* 
+0. 문제 링크
+https://programmers.co.kr/learn/courses/30/lessons/17686
+
 1. 문제설명
 파일명은 HEAD, NUMBER, TAIL로 구성되어있고, 
 HEAD가 동일하면, NUMBER을 기준으로 정렬해야한다. 
@@ -9,7 +12,7 @@ HEAD를 파싱해, 동일한 경우에만 NUMBER을 파싱해 정렬 기준으�
 
 3. 추가공부(git wiki에 정리) 
 정규표현식의 lookahead negative를 공부해, HEAD 파싱에 적용해보았다 
-+ lookahead positive를 이용한 코드 추가 
++) lookahead positive를 이용한 코드 추가 
 */ 
 
 function solution(files) {
