@@ -24,7 +24,7 @@ function parsing(str) {
 
     while (i < str.length - 1) {
         const temp = str.substr(i, parsingNum);
-        const checkChar = temp.match(/[\W\d]/g);
+        const checkChar = temp.match(/[^a-z]/g); // /[\W\d]/g, 공백값 제대로 처리 x 
         if (!checkChar) { res.push(temp); }
         i++;
     }
