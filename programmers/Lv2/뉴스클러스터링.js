@@ -24,7 +24,10 @@ function parsing(str) {
 
     while (i < str.length - 1) {
         const temp = str.substr(i, parsingNum);
-        const checkChar = temp.match(/[^a-z]/g); // /[\W\d]/g, 공백값 제대로 처리 x 
+        const checkChar = temp.match(/[^a-z]/g); 
+        // /[\W\d]/g, 언더스코어 제대로 처리 x 
+        // \w : 영어 + 숫자 + _(언더스코어) 
+        // 해당 내용 정리: https://github.com/live-small/TIL/blob/main/2021/AUG/16-22.md#%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D
         if (!checkChar) { res.push(temp); }
         i++;
     }
