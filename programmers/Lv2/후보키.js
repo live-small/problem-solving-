@@ -19,11 +19,28 @@ function solution(relation) {
     let keyLen = uniqueKey.length;
     for (let i in uniqueKey) {
         const key = uniqueKey[i];
-        const flag = uniqueKey.some((val, idx) => idx !== +i && key.includes(val));
+        const flag = checkSubset(key, +i, uniqueKey);
         if (flag) { keyLen--; }
     }
     answer = keyLen;
     return answer;
+}
+
+
+function checkSubset(target, idx, arr) {
+    let flag = true;
+    flag = arr.some((v, i) => {
+        flag = true;
+        if (idx !== i) {
+            for (let elem of [...v]) {
+                if (flag) { flag = false; }
+                else { break; }
+                if (target.includes(elem)) { flag = true; }
+            }
+            if (flag) { return true; }
+        }
+    })
+    return flag ? true : false;
 }
 
 
@@ -33,8 +50,7 @@ function getCombination(target, radix) {
     target.forEach((fixed, idx, arr) => {
         const rest = arr.slice(idx + 1);
         const restArr = getCombination(rest, radix - 1);
-        // const combi = restArr.map((v) => fixed + v);
-        const combi = restArr.map((v) => (fixed + v).split('').sort((a, b) => a - b).join(''));
+        const combi = restArr.map((v) => fixed + v);
         res.push(...combi);
     })
     return res;
