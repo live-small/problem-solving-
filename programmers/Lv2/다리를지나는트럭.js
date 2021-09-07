@@ -8,7 +8,7 @@
 
 // 처음 짠 코드 
 // : 작동과정을 하나하나 구현해, 다리가 길 때 시간이 오래 걸림. 
-function solution(bridge_length, weight, truck_weights) {
+/* function solution(bridge_length, weight, truck_weights) {
     let timer = 0;
     let currentBriage = [];
     while (currentBriage.length || truck_weights.length) {
@@ -35,7 +35,38 @@ function solution(bridge_length, weight, truck_weights) {
 
 function sum(arr) {
     return arr.reduce((res, cur) => res + cur, 0);
-}
+} */
 
+// ✨ 수정한 코드 
+// : 다리 길이가 길어도 오래걸리지 않게 ! 
+// - 다리가 버틸 수 있는 무게 때문에, 다음 트럭이 못온다면 다리 위 선두 트럭이 나갈 때의 시간으로 바꾸기 
+// - 그러기 위해선, 다리 내 움직인 거리를 할당(moving) -> 나갈 때 시간을 할당(endTime)
+// 참고: 프로그래머스 - 다른사람 풀이 
+
+function solution(bridge_length, weight, truck_weights) {
+    let time = 0;
+    let currentBriage = []; // 다리 위에 있는 트럭정보 
+    let bridge_weight = 0; // 다리 위의 무게 
+    while (currentBriage.length || truck_weights.length) {
+        // 다리 위 선두트럭이 나갈 시간이면, 보내주기 
+        if (currentBriage[0] && currentBriage[0].endTime === time) {
+            bridge_weight -= currentBriage.shift().weight;
+        }
+
+        if (bridge_weight + truck_weights[0] <= weight) {
+            currentBriage.push({
+                weight: truck_weights[0],
+                endTime: time + bridge_length,
+            });
+            bridge_weight += truck_weights.shift();
+        } else {
+            if (currentBriage[0]) {
+                time = currentBriage[0].endTime - 1;
+            }
+        }
+        time++;
+    }
+    return time;
+}
 // 테스트 코드 
 solution(100, 100, [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]); // 110
