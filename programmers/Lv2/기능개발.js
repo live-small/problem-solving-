@@ -1,21 +1,20 @@
 function solution(progresses, speeds) {
 	const answer = [];
-	const needTimes = progresses.map((progress, idx) => {
+	const finishDays = progresses.map((progress, idx) => {
 		return Math.floor((100 - progress) / speeds[idx]);
 	});
-	let nowDay = needTimes[0]; // 현재 날짜
+	let nowDay = finishDays[0]; // 현재 날짜
 
-	while (needTimes.length > 0) {
+	while (finishDays.length > 0) {
 		let count = 0;
 
-		while (needTimes[0] <= nowDay) {
+		while (finishDays[0] <= nowDay) {
 			// 배포가능한 작업, 배포하기
-			needTimes.shift();
+			finishDays.shift();
 			count++;
 		}
-
 		answer.push(count);
-		nowDay = needTimes[0]; // 배포가능한 날짜로 이동
+		nowDay = finishDays[0]; // 배포가능한 날짜로 이동
 	}
 
 	return answer;
