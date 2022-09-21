@@ -23,7 +23,7 @@ for (let i = N - 1; i >= 0; i--) {
 	const useCoin = Math.floor(total / coinUnit[i]);
 	if (useCoin) {
 		count += useCoin;
-		total -= coinUnit[i] * useCoin;
+		total = total % coinUnit[i];
 	}
 }
 
