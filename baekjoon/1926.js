@@ -1,5 +1,6 @@
 let fs = require("fs");
-const input = fs.readFileSync("input.txt").toString().split("\n");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+const input = fs.readFileSync(filePath).toString().split("\n");
 const [n, m] = input.shift().split(" ");
 const board = [...input].map((row) => row.split(" "));
 

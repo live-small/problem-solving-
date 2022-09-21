@@ -1,6 +1,7 @@
 // 입력값 가공
 let fs = require("fs");
-const input = fs.readFileSync("input.txt").toString().split("\n");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+const input = fs.readFileSync(filePath).toString().split("\n");
 const [N, K] = input[0].split(" ").map(Number);
 const arr = input[1].split(" ").map(Number);
 
