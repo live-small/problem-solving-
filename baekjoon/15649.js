@@ -16,10 +16,10 @@ const [N, M] = input.split(" ").map(Number);
 // 백트래킹: 재귀함수를 잘 다루는 게 중요함
 const solution = (n, m) => {
 	const visited = Array(N + 1).fill(0);
-	const answer = [];
+	const answer = Array(M).fill(0);
 
-	const recur = (num) => {
-		if (num === m) {
+	const recur = (len) => {
+		if (len === m) {
 			console.log(answer.join(" "));
 			return;
 		}
@@ -27,12 +27,11 @@ const solution = (n, m) => {
 		for (let i = 1; i <= n; i++) {
 			if (!visited[i]) {
 				visited[i] = 1; // 방문체크
-				answer.push(i);
-				recur(num + 1);
+				answer[len] = i;
+				recur(len + 1);
 
 				// 원상태로 돌려주기 (i 넣기 전 상태로)
 				visited[i] = 0;
-				answer.pop();
 			}
 		}
 	};
