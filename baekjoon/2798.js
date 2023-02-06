@@ -1,11 +1,6 @@
-let fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-const [N, Target, ...arr] = fs
-    .readFileSync(filePath)
-    .toString()
-    .trim()
-    .split(/\s/)
-    .map(Number);
+let fs = require('fs');
+const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
+const [N, Target, ...arr] = fs.readFileSync(filePath).toString().trim().split(/\s/).map(Number);
 
 /*
 -조건
@@ -16,29 +11,29 @@ const [N, Target, ...arr] = fs
 */
 
 const Solution = (N, Target, arr) => {
-    const visited = Array.from({ length: N }, () => 0);
-    let answer = 0;
+  const visited = Array.from({ length: N }, () => 0);
+  let answer = 0;
 
-    const recur = (depth, total) => {
-        if (depth === 3) {
-            if (total <= Target) {
-                answer = Math.max(answer, total);
-            }
-            return;
-        }
+  const recur = (depth, total) => {
+    if (depth === 3) {
+      if (total <= Target) {
+        answer = Math.max(answer, total);
+      }
+      return;
+    }
 
-        for (let i = 0; i < arr.length; i++) {
-            if (!visited[i]) {
-                visited[i] = 1;
-                recur(depth + 1, total + arr[i]);
-                visited[i] = 0;
-            }
-        }
-    };
+    for (let i = 0; i < arr.length; i++) {
+      if (!visited[i]) {
+        visited[i] = 1;
+        recur(depth + 1, total + arr[i]);
+        visited[i] = 0;
+      }
+    }
+  };
 
-    recur(0, 0);
+  recur(0, 0);
 
-    console.log(answer);
+  console.log(answer);
 };
 
 Solution(N, Target, arr);
